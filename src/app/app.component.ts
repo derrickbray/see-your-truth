@@ -20,12 +20,19 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchCenter();
+    this.fetchFarLeft();
+    this.fetchLeft();
+    this.fetchRight();
+    this.fetchFarRight();
+    this.showArticles = this.center;
+  }
 
   // fetchAllArticles() {}
 
   fetchFarLeft() {
-    console.log('far left')
+    // console.log('far left')
     let farLeftLocal = [
       'http://www.occupydemocrats.com/feed',
       'http://www.rawstory.com/feed',
@@ -39,14 +46,14 @@ export class AppComponent implements OnInit {
           articles.forEach(article => {
             this.farLeft.push(article);
           })
-          console.log(this.farLeft);
+          // console.log(this.farLeft);
         });
     });
     // this.farLeft = this.showArticles;
   }
 
   fetchLeft() {
-    console.log('left')
+    // console.log('left')
     let leftLocal = [
       'http://www.huffingtonpost.com/section/politics/feed',
       'http://www.msnbc.com/feeds/latest',
@@ -61,14 +68,14 @@ export class AppComponent implements OnInit {
         articles.forEach(article => {
           this.left.push(article);
         })
-        console.log(this.left);
+        // console.log(this.left);
       })
     })
     // this.left = this.showArticles;
   }
 
   fetchCenter() {
-    console.log('center')
+    // console.log('center')
     let centerLocal = [
       'http://feeds.reuters.com/reuters/topNews',
       // 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
@@ -83,13 +90,13 @@ export class AppComponent implements OnInit {
         articles.forEach(article => {
           this.center.push(article);
         })
-        console.log(this.center);
+        // console.log(this.center);
       })
     })
   }
 
   fetchRight() {
-    console.log('right')
+    // console.log('right')
     let rightLocal = [
       'http://feeds.foxnews.com/foxnews/politics',
       'http://thehill.com/rss/syndicator/19110',
@@ -104,33 +111,45 @@ export class AppComponent implements OnInit {
         articles.forEach(article => {
           this.right.push(article);
         })
-        console.log(this.right);
+        // console.log(this.right);
       })
     })
   }
 
   fetchFarRight() {
-    console.log('far right')
-    // http://www.theblaze.com/rss
-    // http://www.infowars.com/feed
-    // http://www.dailycaller.com/feed
-    // http://feeds.feedburner.com/breitbart?format=xml
-    // https://patriotpost.us/feed.atom
+    // console.log('far right')
+    let farRightLocal = [
+      'http://www.theblaze.com/rss',
+      'http://www.infowars.com/feed',
+      'http://www.dailycaller.com/feed',
+      'http://feeds.feedburner.com/breitbart?format=xml',
+      'https://patriotpost.us/feed.atom'
+    ];
+    farRightLocal.forEach(url => {
+      this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
+      .subscribe(data => {
+        let articles = data['items'];
+        articles.forEach(article => {
+          this.farRight.push(article);
+        })
+        // console.log(this.farRight);
+      })
+    })
   }
 
   sliderValue() {
     let slider = (<HTMLInputElement>document.querySelector(".range-input"));
-    console.log(slider.value);
+    // console.log(slider.value);
     if (slider.value === '1') {
-        this.fetchFarLeft();
+        this.showArticles = this.farLeft;
     }else if (slider.value == '2') {
-        this.fetchLeft();
+        this.showArticles = this.left;
     }else if (slider.value == '3') {
-        this.fetchCenter();
+        this.showArticles = this.center;
     } else if(slider.value == '4') {
-      this.fetchRight();
+      this.showArticles = this.right;
     } else {
-      this.fetchFarRight();
+      this.showArticles = this.farRight;
     }
   }
 }
