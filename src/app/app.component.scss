@@ -1,0 +1,10 @@
+.range {
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &-input {
+    width: 50%;
+    margin: 0 1rem;
+  }
+}
