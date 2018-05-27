@@ -35,42 +35,78 @@ export class AppComponent implements OnInit {
     farLeftLocal.forEach(url => {
         this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
         .subscribe(data => {
-          // console.log(data['items'])
           let articles = data['items'];
           articles.forEach(article => {
             this.farLeft.push(article);
           })
+          console.log(this.farLeft);
         });
     });
-    console.log(this.farLeft);
-    this.farLeft = this.showArticles;
+    // this.farLeft = this.showArticles;
   }
 
   fetchLeft() {
     console.log('left')
-    // 'http://www.huffingtonpost.com/section/politics/feed',
-    // 'http://www.msnbc.com/feeds/latest',
-    // 'http://www.vox.com/rss/index.xml',
-    // 'http://www.theguardian.com/us/rss',
-    // 'https://www.politico.com/rss/politics08.xml'
+    let leftLocal = [
+      'http://www.huffingtonpost.com/section/politics/feed',
+      'http://www.msnbc.com/feeds/latest',
+      'http://www.vox.com/rss/index.xml',
+      'http://www.theguardian.com/us/rss',
+      'https://www.politico.com/rss/politics08.xml'
+    ];
+    leftLocal.forEach(url => {
+      this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
+      .subscribe(data => {
+        let articles = data['items'];
+        articles.forEach(article => {
+          this.left.push(article);
+        })
+        console.log(this.left);
+      })
+    })
+    // this.left = this.showArticles;
   }
 
   fetchCenter() {
     console.log('center')
-    // http://feeds.reuters.com/reuters/topNews
-    // http://rssfeeds.usatoday.com/usatoday-NewsTopStories
-    // http://www.ft.com/?format=rss
-    // https://knowherenews.com/static/rss.xml
-    // https://politics.leadstories.com/atom.xml
+    let centerLocal = [
+      'http://feeds.reuters.com/reuters/topNews',
+      // 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
+      'http://www.ft.com/?format=rss',
+      'https://knowherenews.com/static/rss.xml',
+      'https://politics.leadstories.com/atom.xml'
+    ];
+    centerLocal.forEach(url => {
+      this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
+      .subscribe(data => {
+        let articles = data['items'];
+        articles.forEach(article => {
+          this.center.push(article);
+        })
+        console.log(this.center);
+      })
+    })
   }
 
   fetchRight() {
     console.log('right')
-    // http://feeds.foxnews.com/foxnews/politics
-    // http://thehill.com/rss/syndicator/19110
-    // http://thefiscaltimes.com/feeds/articles/all/rss.xml
-    // http://www.theamericanconservative.com/feed
-    // http://feeds.feedburner.com/realclearpolitics/qlMj
+    let rightLocal = [
+      'http://feeds.foxnews.com/foxnews/politics',
+      'http://thehill.com/rss/syndicator/19110',
+      'http://thefiscaltimes.com/feeds/articles/all/rss.xml',
+      'http://www.theamericanconservative.com/feed',
+      'http://feeds.feedburner.com/realclearpolitics/qlMj'
+    ];
+    rightLocal.forEach(url => {
+      this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
+      .subscribe(data => {
+        let articles = data['items'];
+        articles.forEach(article => {
+          this.right.push(article);
+        })
+        console.log(this.right);
+      })
+    })
   }
 
   fetchFarRight() {
