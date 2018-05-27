@@ -9,9 +9,9 @@
 <section class="slider-main">
   <div class="container">
     <div class="range-wrapper">
-      <span>More Liberal</span>
-      <input class="range-input" (click)="sliderValue()" type="range" min="1" max="5" step="1">
-      <span>More Conservative</span>
+      <span style="color: blue;">More Liberal</span>
+      <input class="range-input" (change)="sliderValue()" type="range" min="1" max="5" step="1">
+      <span style="color: red;">More Conservative</span>
     </div>
   </div>
 </section>

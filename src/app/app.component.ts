@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  allArticles = [];
+  header = { headers: new HttpHeaders(
+    { 'Content-Type': 'application/json', 'Accept': 'application/json;odata=verbose' })
+  };
+
+  showArticles = [];
   farLeft = [];
   left = [];
   center = [];
@@ -21,21 +25,38 @@ export class AppComponent implements OnInit {
   // fetchAllArticles() {}
 
   fetchFarLeft() {
-    // http://www.occupydemocrats.com/feed
-    // http://www.rawstory.com/feed
-    // http://www.addictinginfo.org/feed
-    // http://www.breitbartunmasked.com/feed
+    console.log('far left')
+    let farLeftLocal = [
+      'http://www.occupydemocrats.com/feed',
+      'http://www.rawstory.com/feed',
+      'http://www.addictinginfo.org/feed',
+      'http://www.breitbartunmasked.com/feed'
+    ];
+    farLeftLocal.forEach(url => {
+        this.http.get('https://api.rss2json.com/v1/api.json?rss_url=' + url + '&api_key=8hhoydj1d8idddxgazjhvhiazyecynsi2rasmfga')
+        .subscribe(data => {
+          // console.log(data['items'])
+          let articles = data['items'];
+          articles.forEach(article => {
+            this.farLeft.push(article);
+          })
+        });
+    });
+    console.log(this.farLeft);
+    this.farLeft = this.showArticles;
   }
 
   fetchLeft() {
-    // http://www.huffingtonpost.com/section/politics/feed
-    // http://www.msnbc.com/feeds/latest
-    // http://www.vox.com/rss/index.xml
-    // http://www.theguardian.com/us/rss
-    // https://www.politico.com/rss/politics08.xml
+    console.log('left')
+    // 'http://www.huffingtonpost.com/section/politics/feed',
+    // 'http://www.msnbc.com/feeds/latest',
+    // 'http://www.vox.com/rss/index.xml',
+    // 'http://www.theguardian.com/us/rss',
+    // 'https://www.politico.com/rss/politics08.xml'
   }
 
   fetchCenter() {
+    console.log('center')
     // http://feeds.reuters.com/reuters/topNews
     // http://rssfeeds.usatoday.com/usatoday-NewsTopStories
     // http://www.ft.com/?format=rss
@@ -44,6 +65,7 @@ export class AppComponent implements OnInit {
   }
 
   fetchRight() {
+    console.log('right')
     // http://feeds.foxnews.com/foxnews/politics
     // http://thehill.com/rss/syndicator/19110
     // http://thefiscaltimes.com/feeds/articles/all/rss.xml
@@ -52,6 +74,7 @@ export class AppComponent implements OnInit {
   }
 
   fetchFarRight() {
+    console.log('far right')
     // http://www.theblaze.com/rss
     // http://www.infowars.com/feed
     // http://www.dailycaller.com/feed
@@ -62,5 +85,16 @@ export class AppComponent implements OnInit {
   sliderValue() {
     let slider = (<HTMLInputElement>document.querySelector(".range-input"));
     console.log(slider.value);
+    if (slider.value === '1') {
+        this.fetchFarLeft();
+    }else if (slider.value == '2') {
+        this.fetchLeft();
+    }else if (slider.value == '3') {
+        this.fetchCenter();
+    } else if(slider.value == '4') {
+      this.fetchRight();
+    } else {
+      this.fetchFarRight();
+    }
   }
 }
