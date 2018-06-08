@@ -1,21 +1,28 @@
-<nav class="nav">
-  <div class="container">
-    <div class="nav-content">
-      <h2 class="nav-content__box">What's your Truth</h2>
-    </div>
-  </div>
-</nav>
+<div class="relative">
+  <div class="sticky">
+    <nav class="nav">
+      <div class="container">
+        <div class="nav-content">
+          <h2 class="nav-content__box">What's your Truth</h2>
+        </div>
+      </div>
+    </nav>
 
-<section class="slider-main">
-  <div class="container">
-    <div class="range-wrapper">
-      <span style="color: blue;">More Liberal</span>
-      <input class="range-input" (change)="sliderValue()" type="range" min="1" max="5" step="1">
-      <span style="color: red;">More Conservative</span>
-    </div>
+    <section class="slider-main">
+      <div class="container">
+        <div class="range-wrapper">
+          <span style="color: blue;">More Liberal</span>
+          <input class="range-input" (change)="sliderValue()" type="range" min="1" max="5" step="1">
+          <span style="color: red;">More Conservative</span>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
+</div>
 
 <section class="articles">
-  <div class="article" *ngFor="let article of showArticles">{{ article.title }}</div>
+  <div class="article" *ngFor="let article of showArticles">
+    <a class="article-title" href="{{article.link}}">{{ article.title }}</a>
+
+  </div>
 </section>

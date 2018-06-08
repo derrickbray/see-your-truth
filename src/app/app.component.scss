@@ -1,3 +1,8 @@
+.sticky {
+  position: fixed;
+
+}
+
 .range {
   &-wrapper {
     display: flex;
@@ -7,4 +12,12 @@
     width: 30%;
     margin: 0 1rem;
   }
+}
+
+.articles {
+  padding: 2rem;
+}
+
+.article {
+  margin: 1rem 0;
 }

@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
         articles.forEach(article => {
           this.center.push(article);
         })
-        // console.log(this.center);
+        console.log(this.center);
       })
     })
   }
