@@ -1,6 +1,14 @@
+.relative {
+  position: relative;
+  width: 100%;
+}
+
 .sticky {
   position: fixed;
-
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 100;
 }
 
 .range {
@@ -16,6 +24,7 @@
 
 .articles {
   padding: 2rem;
+  padding-top: 6rem;
 }
 
 .article {
